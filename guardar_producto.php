@@ -1,0 +1,30 @@
+<?php
+
+// Validaciones
+extract($_POST);
+
+if ($id == '') {
+    $sql = "insert into productos set nombre = '$nombre', descripcion = '$descripcion', precio = $precio, id_rubro = $id_rubro";
+} else {
+    $sql = "update productos set nombre = '$nombre', descripcion = '$descripcion', precio = $precio, id_rubro = $id_rubro where id = $id";
+}
+
+require 'conexion.php';
+
+// Verificar conexion
+if ($conexion) {
+
+    $resultado = mysqli_query($conexion, $sql);
+    
+    if ($resultado) {
+        //header('location: index.php?accion=productos');
+        //exit;
+        echo 'Producto guardado';
+        echo '<a href="?accion=productos">Volver</a>';
+    } else {
+        echo 'Error, no se pudo guardar el producto';
+    }
+
+} else {
+    echo 'No se puede acceder a los datos';
+}
