@@ -1,10 +1,30 @@
 <?php
+
+// Funcion que recibe la conexion a mysql y genera un campo de formulario llamado id_marca
+function crearCampoMarca($conexion, $id_marca_elegido = 0) {
+   $sql = "select * from marcas where not borrado order by nombre";
+   $marcas = mysqli_query($conexion, $sql);
+   if ($marcas) {
+      $campoMarca = '<select name="id_marca">';
+      while ($marca = mysqli_fetch_assoc($marcas)) {
+         extract($marca);
+         $campoMarca .= "<option value='$id'>$nombre</option>";
+      }
+      $campoMarca .= '</select>';
+      return $campoMarca;
+   } else {
+      return false;
+   }
+}
+
 require 'conexion.php';
+
 if ($conexion) {
-   // Contruimos la sentencia SQL
+
+   // Contruimos la sentencia SQL para consultar los rubros y construir el campo id_rubro
    $sql = 'select id as id_de_rubro, nombre as nombre_rubro from rubros order by nombre';
 
-   // Ejecutamos y obtenermos el resultado
+   // Ejecutamos y obtenemos el resultado
    $resultado = mysqli_query($conexion, $sql);
 
    if ($resultado) {
@@ -16,16 +36,13 @@ if ($conexion) {
       while ($rubro = mysqli_fetch_assoc($resultado)) {
          extract($rubro);
 
-         /*                 if ($fila['id'] == $id_rubro) {
-                    $elegido = 'selected';
-                } else {
-                    $elegido = '';
-                } */
          $elegido = ($id_de_rubro == $id_rubro) ? 'selected' : '';
          $campo_rubro = $campo_rubro . "<option $elegido value='$id_de_rubro'>$nombre_rubro</option>";
       }
 
       $campo_rubro = $campo_rubro . '</select>';
+   } else {
+      $error = 1;
    }
 }
 ?>
@@ -57,6 +74,12 @@ if ($conexion) {
       <label for="">Rubro</label>
       <br>
       <?= $campo_rubro ?>
+   </div>
+
+   <div>
+      <label for="">Marca</label>
+      <br>
+      <?php echo crearCampoMarca($conexion, $id_marca); ?>
    </div>
 
    <div>

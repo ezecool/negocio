@@ -1,7 +1,7 @@
 <?php
 
-    $task = $_REQUEST['task'];
-    switch ($task) {
+    $tarea = $_REQUEST['tarea'];
+    switch ($tarea) {
         case 'editar':
             require 'form_marca.php';
             break;
@@ -14,6 +14,8 @@
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     extract($_POST);
+
+                    
                     
                     // Guardamos los datos
                     if ( ($id == '') || ($id == 0) ) {
@@ -56,7 +58,7 @@
                 echo "
                     <form action='index.php' method='post'>
                         <input type='hidden' name='accion' value='marcas'>
-                        <input type='hidden' name='task' value='borrar'>
+                        <input type='hidden' name='tarea' value='borrar'>
                         <input type='hidden' name='id' value='$id'>
                         <input type='hidden' name='confirm'>
                         <input type='submit' value='Aceptar'>
@@ -68,7 +70,7 @@
         default:
             echo '
                 <div>
-                    <a href="?accion=marcas&task=editar">Agregar</a>
+                    <a href="?accion=marcas&tarea=editar">Agregar</a>
                 </div>            
             ';
             require 'conexion.php';
@@ -88,8 +90,8 @@
                             <tr>
                                 <td>$id</td>
                                 <td>$nombre</td>
-                                <td><a href='index.php?accion=marcas&task=editar&id=$id'>Editar</a></td>
-                                <td><a href='index.php?accion=marcas&task=borrar&id=$id'>Borrar</a></td>
+                                <td><a href='index.php?accion=marcas&tarea=editar&id=$id'>Editar</a></td>
+                                <td><a href='index.php?accion=marcas&tarea=borrar&id=$id'>Borrar</a></td>
                             </tr>
                         ";
                     }

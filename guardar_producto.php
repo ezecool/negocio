@@ -4,9 +4,9 @@
 extract($_POST);
 
 if ($id == '') {
-    $sql = "insert into productos set nombre = '$nombre', descripcion = '$descripcion', precio = $precio, id_rubro = $id_rubro";
+    $sql = "insert into productos set nombre = '$nombre', descripcion = '$descripcion', precio = $precio, id_rubro = $id_rubro, id_marca = $id_marca";
 } else {
-    $sql = "update productos set nombre = '$nombre', descripcion = '$descripcion', precio = $precio, id_rubro = $id_rubro where id = $id";
+    $sql = "update productos set nombre = '$nombre', descripcion = '$descripcion', precio = $precio, id_rubro = $id_rubro, id_marca = $id_marca where id = $id";
 }
 
 require 'conexion.php';

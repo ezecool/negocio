@@ -25,7 +25,7 @@
                <li><a href="?accion=marcas">Marcas</a></li>
                <li><a href="">Rubros</a></li>
                <li><a href="">Categorias</a></li>
-               <li><a href="">Ventas</a></li>
+               <li><a href="index.php?accion=ventas">Ventas</a></li>
             </ul>
          </nav>
       </div>
@@ -49,6 +49,12 @@
                break;
             case 'marcas':
                include 'marcas.php';
+               break;
+            case 'ventas':
+               include 'form_venta.php';
+               break;
+            case 'guardar_venta':
+               include 'guardar_venta.php';
                break;
             default:
                # code...

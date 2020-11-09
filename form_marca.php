@@ -13,7 +13,7 @@
          echo "<form action='index.php' method='post'>
             
             <input type='hidden' name='accion' value='marcas'>
-            <input type='hidden' name='task' value='guardar'>
+            <input type='hidden' name='tarea' value='guardar'>
             <input type='hidden' name='id' value='$id'>
             
             <div>

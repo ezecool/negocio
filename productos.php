@@ -1,4 +1,16 @@
 
+
+<div>
+    <form action="index.php" method="get">
+        <input type="hidden" name="accion" value="productos">
+        <div>
+            Buscar producto: 
+            <input type="text" name="buscado"><br>
+            <button type="submit">Filtrar</button>
+        </div>
+    </form>
+</div>
+
 <div>
     <a href="?accion=editar_producto">Nuevo producto</a>
 </div>
@@ -10,9 +22,14 @@ require 'conexion.php';
 
 // Verificar conexion
 if ($conexion) {
+    
+    if (isset($_GET['buscado'])) {
+        extract($_GET);
+        $filtro = " where nombre like '%$buscado%'";
+    }
 
     // Contruimos la sentencia SQL
-    $sql = 'SELECT * FROM productos';
+    $sql = "SELECT * FROM productos $filtro";
 
     // Ejecutamos y obtenermos el resultado
     $resultado = mysqli_query($conexion, $sql);
