@@ -14,8 +14,6 @@
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     extract($_POST);
-
-                    
                     
                     // Guardamos los datos
                     if ( ($id == '') || ($id == 0) ) {

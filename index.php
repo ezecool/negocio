@@ -22,7 +22,8 @@
             <ul>
                <li><a href="index.php">Inicio</a></li>
                <li><a href="index.php?accion=productos">Productos</a></li>
-               <li><a href="?accion=marcas">Marcas</a></li>
+               <li><a href="index.php?accion=marcas">Marcas</a></li>
+               <li><a href="index.php?accion=proveedores">Proveedores</a></li>
                <li><a href="">Rubros</a></li>
                <li><a href="">Categorias</a></li>
                <li><a href="index.php?accion=ventas">Ventas</a></li>
@@ -33,7 +34,9 @@
       <div id="contenido">
 
       <?php
+         // Capturamos el parametro accion para determinar que archivo de codigo debemos cargar en el index
          $accion = $_REQUEST['accion'];
+
          switch ($accion) {
             case 'productos':
                include 'productos.php';
@@ -49,6 +52,9 @@
                break;
             case 'marcas':
                include 'marcas.php';
+               break;
+            case 'proveedores':
+               include 'proveedores.php';
                break;
             case 'ventas':
                include 'form_venta.php';
