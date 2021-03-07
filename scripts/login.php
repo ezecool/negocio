@@ -1,10 +1,15 @@
 <?php
+
+include 'helpers.php';
+
 if (isset($_POST['username']) && isset($_POST['password'])) {
-	include 'conexion.inc.php';
-	include 'cifrado.inc.php';
+
+	include 'conexion.php';
+	//include 'cifrado.inc.php';
 	if (!$conexion) {
 		//$error = 'No se puede acceder a la base de datos';
-		$error = mysqli_error($conexion);
+		// $error = mysqli_error($conexion);
+		$_SESSION['mensaje'] = 'No se puede acceder a la base de datos';
 	} else {
 		// proceso de logueo
 		extract($_POST);
@@ -12,32 +17,19 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 		$resultado = mysqli_query($conexion, $consulta);
 		if ($resultado) {
 			if (mysqli_num_rows($resultado) > 0) {
-				// Verifico la contraseña
-				$registro = mysqli_fetch_assoc($resultado);
-				$hash = $registro['password'];
-				if ( password_verify($password, $hash) ) {
 
+				// Comprobamos la contraseña
+				$usuario = mysqli_fetch_assoc($resultado);
+				//$hash = $usuario['password'];
+				if ( password_verify($password, $usuario['password']) ) {
 					// usuario y password correctos
-					$_SESSION['username'] = $registro['username'];
-					$_SESSION['idUser'] = $registro['id'];
-					$_SESSION['app'] = 'escribania';
-
-				//header("location: $path");
-					//header("location: ../index.php");
-					//exit();
-
+					$_SESSION['username'] = $usuario['username'];
+					//$_SESSION['idUser'] = $usuario['id'];
 				} else {
-					$_SESSION['mensaje'] = 'Usuario o Contraseña incorrectos';
+					$_SESSION['mensaje'] = 'Password incorrecto';
 				}
-				// if ($registro['password'] == cifrar($password)) {
-/* 				if ($registro['password'] == cifrar($password)) {
-					// usuario y password correctos
-					$_SESSION['username'] = $username;
-				} else {
-					$_SESSION['mensaje'] = 'Usuario o Contraseña incorrectos';
-				} */
 			} else {
-				$_SESSION['mensaje'] = 'Usuario o Contraseña incorrectos';
+				$_SESSION['mensaje'] = 'Usuario incorrecto';
 			}
 		} else {
 			$_SESSION['mensaje'] = 'Error de comprobacion de credenciales';
@@ -79,9 +71,11 @@ if (isset($_SESSION['mensaje'])) {
 			</div>
 		</div>
 
-
 		<button type="submit" class="btn btn-primary btn-block">Ingresar</button>
 	</form>
 </div>
-<!-- <script src="js/login.js?<?php //echo time(); 
-															?>"></script> -->
+
+<div>
+	<a href="index.php?accion=registro">Registrame</a>
+</div>
+

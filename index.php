@@ -1,6 +1,15 @@
 <?php
    ini_set('display_errors', 0);
-   set_include_path('includes');
+   set_include_path('scripts');
+
+   session_start();
+
+	if ($_REQUEST['accion'] == 'logout') {
+		session_destroy();
+		header("location: index.php");
+		exit();
+	}
+      
 ?>
 
 <!DOCTYPE html>
@@ -13,67 +22,96 @@
 <body>
    <div id="marco">
 
-      <div id="cabecera">
-         <h1>Negocio</h1>
-      </div>
-
-      <div id="menu">
-         <nav>
-            <ul>
-               <li><a href="index.php">Inicio</a></li>
-               <li><a href="index.php?accion=productos">Productos</a></li>
-               <li><a href="index.php?accion=marcas">Marcas</a></li>
-               <li><a href="index.php?accion=proveedores">Proveedores</a></li>
-               <li><a href="">Rubros</a></li>
-               <li><a href="">Categorias</a></li>
-               <li><a href="index.php?accion=ventas">Ventas</a></li>
-            </ul>
-         </nav>
-      </div>
-
-      <div id="contenido">
-
+      <!-- Mostramos las notificaciones guardadas en una variable de session -->
       <?php
-         // Capturamos el parametro accion para determinar que archivo de codigo debemos cargar en el index
-         $accion = $_REQUEST['accion'];
-
-         switch ($accion) {
-            case 'productos':
-               include 'productos.php';
-               break;
-            case 'editar_producto':
-               include 'editar_producto.php';
-               break;
-            case 'borrar_producto':
-               include 'borrar_producto.php';
-               break;
-            case 'guardar_producto';
-               include 'guardar_producto.php';
-               break;
-            case 'marcas':
-               include 'marcas.php';
-               break;
-            case 'proveedores':
-               include 'proveedores.php';
-               break;
-            case 'ventas':
-               include 'form_venta.php';
-               break;
-            case 'guardar_venta':
-               include 'guardar_venta.php';
-               break;
-            default:
-               # code...
-               break;
+         if (isset($_SESSION['mensaje'])) {
+            echo $_SESSION['mensaje'];
+            unset($_SESSION['mensaje']);
          }
       ?>
 
-      </div>
+		<?php
+		if (!isset($_SESSION['username'])) {
+			
+         if ($_REQUEST['accion'] == 'registro') {
+            include 'registro.php';
+         } else {
+            include 'login.php';
+         }
 
-      <div>
-         <div id="pie">
+		} else {
+      ?>
+         <div id="menu">
+            <div>
+               <h5>
+                  Usuario: <?= $_SESSION['username'] ?>
+               </h5>
+            </div>
+            <nav>
+               <ul>
+                  <li><a href="index.php">Inicio</a></li>
+                  <li><a href="index.php?accion=productos">Productos</a></li>
+                  <li><a href="index.php?accion=marcas">Marcas</a></li>
+                  <li><a href="index.php?accion=proveedores">Proveedores</a></li>
+                  <li><a href="">Rubros</a></li>
+                  <li><a href="">Categorias</a></li>
+                  <li><a href="index.php?accion=ventas">Comprar</a></li>
+                  <li><a href="index.php?accion=logout">Desconectar</a></li>
+               </ul>
+            </nav>
          </div>
-      </div>
+
+         <div id="cabecera">
+            <h1>Negocio</h1>
+         </div>
+
+         <div id="contenido">
+
+         <?php
+            // Capturamos el parametro accion para determinar que archivo de codigo debemos cargar en el index
+            $accion = $_REQUEST['accion'];
+
+            switch ($accion) {
+               case 'registro':
+                  include 'form_registro.php';
+                  break;
+               case 'productos':
+                  include 'productos.php';
+                  break;
+               case 'editar_producto':
+                  include 'editar_producto.php';
+                  break;
+               case 'borrar_producto':
+                  include 'borrar_producto.php';
+                  break;
+               case 'guardar_producto';
+                  include 'guardar_producto.php';
+                  break;
+               case 'marcas':
+                  include 'marcas.php';
+                  break;
+               case 'proveedores':
+                  include 'proveedores.php';
+                  break;
+               case 'ventas':
+                  include 'form_venta.php';
+                  break;
+               case 'guardar_venta':
+                  include 'guardar_venta.php';
+                  break;
+               default:
+                  # code...
+                  break;
+            }
+         ?>
+
+         </div>
+
+         <div>
+            <div id="pie">
+            </div>
+         </div>
+      <?php } ?>
    </div>
 </body>
 </html>
