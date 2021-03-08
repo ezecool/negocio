@@ -41,25 +41,13 @@
 
 		} else {
       ?>
-         <div id="menu">
-            <div>
-               <h5>
-                  Usuario: <?= $_SESSION['username'] ?>
-               </h5>
-            </div>
-            <nav>
-               <ul>
-                  <li><a href="index.php">Inicio</a></li>
-                  <li><a href="index.php?accion=productos">Productos</a></li>
-                  <li><a href="index.php?accion=marcas">Marcas</a></li>
-                  <li><a href="index.php?accion=proveedores">Proveedores</a></li>
-                  <li><a href="">Rubros</a></li>
-                  <li><a href="">Categorias</a></li>
-                  <li><a href="index.php?accion=ventas">Comprar</a></li>
-                  <li><a href="index.php?accion=logout">Desconectar</a></li>
-               </ul>
-            </nav>
-         </div>
+      <div>
+         <h5>
+            Usuario: <?= $_SESSION['username'] ?>
+         </h5>
+      </div>
+
+         <?php include 'menu.php'; ?>
 
          <div id="cabecera">
             <h1>Negocio</h1>
@@ -93,8 +81,11 @@
                case 'proveedores':
                   include 'proveedores.php';
                   break;
-               case 'ventas':
-                  include 'form_venta.php';
+               case 'comprar':
+                  include 'compra.php';
+                  break;
+               case 'carrito':
+                  include 'carrito.php';
                   break;
                case 'guardar_venta':
                   include 'guardar_venta.php';

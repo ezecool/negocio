@@ -28,7 +28,7 @@
 
 <h3>Formulario de registro</h3>
 <form action="index.php" method="post">
-   <input type="text" name="accion" value="registro">
+   <input type="hidden" name="accion" value="registro">
    <div>
       <label for="email">Email</label>
       <input type="text" name="email" id="email">

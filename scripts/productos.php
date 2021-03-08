@@ -1,4 +1,9 @@
-
+<?php
+    if ($_SESSION['nivel'] == 0) {
+        $_SESSION['mensaje'] = 'No tiene autorizacion para acceder a esta pagina';
+        header('location: index.php');
+    }
+?>
 
 <div>
     <form action="index.php" method="get">

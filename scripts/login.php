@@ -24,7 +24,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 				if ( password_verify($password, $usuario['password']) ) {
 					// usuario y password correctos
 					$_SESSION['username'] = $usuario['username'];
-					//$_SESSION['idUser'] = $usuario['id'];
+					$_SESSION['nivel'] = $usuario['nivel'];
 				} else {
 					$_SESSION['mensaje'] = 'Password incorrecto';
 				}
@@ -59,14 +59,14 @@ if (isset($_SESSION['mensaje'])) {
 
 		<div class="form-group">
 			<label>Usuario</label>
-			<input type="text" id="username" name="username" class="form-control" autofocus value="admin">
+			<input type="text" id="username" name="username" class="form-control" autofocus>
 			<span class="campo-invalido"></span>
 		</div>
 
 		<div>
 			<div class="form-group">
 				<label for="password">Contrase&ntilde;a</label>
-				<input type="password" id="password" name="password" class="form-control" value="admin">
+				<input type="password" id="password" name="password" class="form-control">
 				<span class="campo-invalido"></span>
 			</div>
 		</div>
