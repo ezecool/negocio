@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 07-03-2021 a las 18:47:50
+-- Tiempo de generación: 09-03-2021 a las 15:49:34
 -- Versión del servidor: 10.3.25-MariaDB-0ubuntu0.20.04.1
 -- Versión de PHP: 7.4.3
 
@@ -123,8 +123,8 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `cantidad`, `i
 (5, 'Ultrabook', 'Notebook DELL 14R', 79000, 10, 6, NULL),
 (7, 'Mesa para PC', 'Mesa para PC color caoba', 14000, 10, 7, NULL),
 (8, 'Kit Teclado y Mouse wireless', 'Kit Teclado y Mouse wireless Kit Teclado y Mouse wireless Kit Teclado y Mouse wireless', 3000, 10, 6, NULL),
-(9, 'Licuadora', 'alalaslda mdlasdmlasldals mdm mdm dsdsdqwyu wyqyuwy djkahsjdhjasdbd basnbd asbhdbas hdjkasbfd gvrv n.', 8100, 10, 5, 9),
-(10, 'Soporte microfono', 'Soporte para microfono flexible 50 cm blanco', 650, 10, 6, 14);
+(9, 'Licuadora', 'alalaslda mdlasdmlasldals mdm mdm dsdsdqwyu wyqyuwy djkahsjdhjasdbd basnbd asbhdbas hdjkasbfd gvrv n.', 8100, 8, 5, 9),
+(10, 'Soporte microfono', 'Soporte para microfono flexible 50 cm blanco', 650, 7, 6, 14);
 
 -- --------------------------------------------------------
 
@@ -194,7 +194,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `username`, `password`, `email`, `nivel`) VALUES
 (1, 'qwq', 'errer', 'hernan@email.com', 0),
-(2, 'hernan', '$2y$10$77qrsJKFvDkwXf6yJSY9Y.BVrVjNvNHBt4oceRdIyPzoFKjGWIG8K', 'hernan@email.com', 0);
+(2, 'hernan', '$2y$10$77qrsJKFvDkwXf6yJSY9Y.BVrVjNvNHBt4oceRdIyPzoFKjGWIG8K', 'hernan@email.com', 0),
+(3, 'admin', '$2y$10$/CwNToE4iaKNFkuay.pc2eDZP7UVtJWQWLih71bec3FyRd7zHBO7S', 'admin@email.com', 1);
 
 -- --------------------------------------------------------
 
@@ -207,28 +208,15 @@ CREATE TABLE `ventas` (
   `fecha` datetime NOT NULL,
   `id_producto` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `id_cliente` int(11) DEFAULT NULL
+  `id_usuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `ventas`
 --
 
-INSERT INTO `ventas` (`id`, `fecha`, `id_producto`, `cantidad`, `id_cliente`) VALUES
-(1, '2020-10-20 00:00:00', 3, 2, NULL),
-(4, '2020-10-20 00:00:00', 3, 3, NULL),
-(8, '2020-10-20 00:00:00', 1, 1, NULL),
-(9, '2020-10-20 00:00:00', 1, 1, NULL),
-(10, '2020-10-20 00:00:00', 1, 1, NULL),
-(11, '2020-10-20 00:00:00', 1, 1, NULL),
-(12, '2020-10-20 22:10:00', 1, 1, NULL),
-(13, '2020-10-20 22:10:00', 1, 1, NULL),
-(14, '2020-10-20 22:10:00', 1, 1, NULL),
-(15, '2020-10-20 22:10:00', 1, 1, NULL),
-(16, '2020-10-20 07:46:00', 1, 1, NULL),
-(17, '2020-10-20 19:47:00', 1, 1, NULL),
-(18, '2020-11-09 10:17:00', 3, 1, 2),
-(19, '2020-12-01 11:04:00', 3, 2, 3);
+INSERT INTO `ventas` (`id`, `fecha`, `id_producto`, `cantidad`, `id_usuario`) VALUES
+(44, '2021-03-09 15:42:00', 9, 1, 2);
 
 --
 -- Índices para tablas volcadas
@@ -328,13 +316,13 @@ ALTER TABLE `rubros`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
