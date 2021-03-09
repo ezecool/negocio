@@ -1,4 +1,11 @@
 <?php
+include 'helpers.php';
+chequearSesion();
+
+if ($_SESSION['nivel'] != 0) {
+    $_SESSION['mensaje'] = 'No tiene autorizacion para acceder a esta pagina';
+    header('location: index.php');
+}
 
 //var_dump($_SESSION['carrito']);
 include 'conexion.php';
@@ -23,7 +30,7 @@ if ($conexion) {
             //var_dump($prod);
          }
       }
-      var_dump($productos);
+      //var_dump($productos);
 
       echo '<h3>Productos elegidos</h3>';
       echo '<table>';
@@ -32,12 +39,14 @@ if ($conexion) {
       // Para cada elemento del array carrito, que esta guardado en la sesion, creamos una fila de tabla para mostrar sus datos
 
       foreach ($_SESSION['carrito'] as $id_producto => $cantidad) {
-            // obtengo la descripcion del producto, usando una funcion declarada en productos.php
-            //$nombre = $productos            
-            echo "<tr> <td>" . $productos[$id_producto] ."</td> <td>$cantidad</td> </tr>";
+         echo "<tr> <td>" . $productos[$id_producto] ."</td> <td>$cantidad</td> </tr>";
       }
       echo '</table>';
 
+      echo '<a href="index.php?accion=guardar_compra">Finalizar compra</a>';
+
+   } else {
+      echo '<p>Carrito vacio</p>';
    }
 }
 ?>

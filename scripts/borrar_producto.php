@@ -1,5 +1,10 @@
 <?php
 
+    if ($_SESSION['nivel'] == 0) {
+        $_SESSION['mensaje'] = 'No tiene autorizacion para acceder a esta pagina';
+        header('location: index.php');
+    }
+
 // Validaciones pendientes
 
 // Obtengo el id de producto pasado por el enlace Eliminar

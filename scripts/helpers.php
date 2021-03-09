@@ -5,4 +5,12 @@ function hashear($password) {
   return $hash; 
 }
 
+function chequearSesion() {
+  
+  if (!isset($_SESSION['username'])) {
+    header('location: index.php');
+    exit();
+  }
+}
+
 ?>

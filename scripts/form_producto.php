@@ -1,5 +1,10 @@
 <?php
 
+    if ($_SESSION['nivel'] == 0) {
+        $_SESSION['mensaje'] = 'No tiene autorizacion para acceder a esta pagina';
+        header('location: index.php');
+    }
+
 // Funcion que recibe la conexion a mysql y genera un campo de formulario llamado id_marca
 function crearCampoMarca($conexion, $id_marca_elegido = 0) {
    $sql = "select * from marcas where not borrado order by nombre";

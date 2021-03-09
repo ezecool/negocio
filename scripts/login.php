@@ -25,6 +25,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 					// usuario y password correctos
 					$_SESSION['username'] = $usuario['username'];
 					$_SESSION['nivel'] = $usuario['nivel'];
+					$_SESSION['id_usuario'] = $usuario['id'];
 				} else {
 					$_SESSION['mensaje'] = 'Password incorrecto';
 				}

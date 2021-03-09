@@ -1,5 +1,8 @@
 <?php
-
+    if ($_SESSION['nivel'] == 0) {
+        $_SESSION['mensaje'] = 'No tiene autorizacion para acceder a esta pagina';
+        header('location: index.php');
+    }
 // Si le pasamos el parametro id por la URL, guardamos su valor en $id para obtener los datos de ese producto desde la base de datos
 $id = $_GET['id'];
 

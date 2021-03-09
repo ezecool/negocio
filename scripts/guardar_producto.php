@@ -1,4 +1,11 @@
 <?php
+include 'helpers.php';
+chequearSesion();
+
+if ($_SESSION['nivel'] == 0) {
+    $_SESSION['mensaje'] = 'No tiene autorizacion para acceder a esta pagina';
+    header('location: index.php');
+}
 
 // Validaciones
 extract($_POST);
@@ -15,7 +22,7 @@ require 'conexion.php';
 if ($conexion) {
 
     $resultado = mysqli_query($conexion, $sql);
-    
+
     if ($resultado) {
         //header('location: index.php?accion=productos');
         //exit;

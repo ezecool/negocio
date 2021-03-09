@@ -1,4 +1,8 @@
 <?php
+    if ($_SESSION['nivel'] == 0) {
+        $_SESSION['mensaje'] = 'No tiene autorizacion para acceder a esta pagina';
+        header('location: index.php');
+    }
    // Si hay un id por get, recupero los datos de esa marca desde la BD para autocompletar el formulario con los datos de la marca que se quiere editar
    $id = isset($_GET['id']) ? $_GET['id'] : 0;
    require_once 'conexion.php';

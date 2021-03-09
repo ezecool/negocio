@@ -1,4 +1,8 @@
 <?php
+    include 'helpers.php';
+    chequearSesion();
+
+    /* Verificamos que no sea un usuario comun el que quiere acceder a esta pagina, lo sacamos de la pagina y colocamos un mensaje que se mostrara en el index */
     if ($_SESSION['nivel'] == 0) {
         $_SESSION['mensaje'] = 'No tiene autorizacion para acceder a esta pagina';
         header('location: index.php');

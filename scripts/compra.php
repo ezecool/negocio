@@ -1,9 +1,18 @@
 <?php
+
+include 'helpers.php';
+chequearSesion();
+
+if ($_SESSION['nivel'] != 0) {
+    $_SESSION['mensaje'] = 'No tiene autorizacion para acceder a esta pagina';
+    header('location: index.php');
+}
+
 require_once 'conexion.php';
 
 if ($conexion) {
 
-    // Si recibimos un producto y cantidad, lo agregamo al carrito que es una variable de sesion
+    // Si recibimos un producto y cantidad, lo agregamos al carrito que es una variable de sesion
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Tomamos los datos del formulario
         extract($_REQUEST); // $id_producto y $cantidad
@@ -12,7 +21,7 @@ if ($conexion) {
     }
 
     // Mostramos un formulario para elegir producto y cantidad que queremos comprar //
-    
+
     // Obtenemos los productos para construir un campo select
     $sql = 'select * from productos order by nombre';
     $resultado = mysqli_query($conexion, $sql);
@@ -49,8 +58,8 @@ if ($conexion) {
         </form>
     <?php
 
-    } else {
-        $_SESSION['mensaje'] = 'No se puede acceder a los datos en este momento.';
-        header('location: ./');
-    }
-    ?>
+} else {
+    $_SESSION['mensaje'] = 'No se puede acceder a los datos en este momento.';
+    header('location: ./');
+}
+?>
